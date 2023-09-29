@@ -1,0 +1,24 @@
+.search-form {
+	background-color: rgba(0, 0, 0, 0.5);
+	background-image: url(/img/search-background.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: multiply;
+
+	&__content {
+		display: flex;
+		justify-content: center;
+		padding: 90px 0;
+	}
+
+	&__field {
+		input {
+			all: unset;
+			min-width: 850px;
+			background-color: #fff;
+			padding: 20px 40px;
+			font-size: 24px;
+		}
+	}
+}
