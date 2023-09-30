@@ -16,20 +16,20 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+
+import type { Ref } from "vue";
+import type { LocationQueryValue } from "vue-router";
 
 const route = useRouter();
 const store = useStore();
 
-const searchInput = ref("");
+const searchInput: Ref<string | LocationQueryValue[]> = ref("");
 
-const searchedPhotos = computed(() => {
-	return store.state.searchedPhotos;
-});
-
-function getSearch({ target: { value } }: string) {
+function getSearch({ target }: KeyboardEvent) {
+	const { value } = target as HTMLInputElement;
 	if (route.currentRoute.value.name !== "search") {
 		route.push({ path: "search", query: { query: value } });
 	} else {

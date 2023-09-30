@@ -1,6 +1,5 @@
 import { createStore } from "vuex";
 import { createApi } from "unsplash-js";
-// import axios from "axios";
 
 const unsplash = createApi({
 	accessKey: "yVElslHx4YIhG7pfjAG4Vy90sfHkwNXy-p7DdR8DCxw",
@@ -50,5 +49,3 @@ export default createStore({
 		},
 	},
 });
-
-// non-feed example

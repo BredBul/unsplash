@@ -1,13 +1,13 @@
 <template>
 	<main class="home-page">
 		<SearchForm />
-		<PhotosGrid />
+		<RandomPhotos />
 	</main>
 </template>
 
 <script setup lang="ts">
 import SearchForm from "@/components/search-form/SearchForm.vue";
-import PhotosGrid from "./partials/PhotosGrid.vue";
+import RandomPhotos from "./partials/RandomPhotos.vue";
 </script>
 
 <style src="./style.scss" />
