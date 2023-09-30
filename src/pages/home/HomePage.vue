@@ -1,7 +1,7 @@
 <template>
 	<main class="home-page">
-		<SearchForm />
-		<RandomPhotos />
+		<SearchForm class="home-page__search-form"/>
+		<RandomPhotos class="home-page__random-photos" />
 	</main>
 </template>
 
