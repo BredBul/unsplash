@@ -9,12 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
 const { photos } = defineProps({ photos: Array<any> });
-
-onMounted(() => {
-	console.log(photos);
-});
 </script>
 
 <style src="./style.scss" />

@@ -1,5 +1,5 @@
 <template>
-	<section class="home-page__random-photos random-photos">
+	<section class="random-photos">
 		<div class="random-photos__container _container">
 			<PhotoList :photos="randomPhotos" />
 		</div>
