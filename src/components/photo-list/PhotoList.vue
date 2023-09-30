@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted } from "vue";
+import { onMounted } from "vue";
 const { photos } = defineProps({ photos: Array<any> });
 
 onMounted(() => {
