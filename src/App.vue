@@ -1,6 +1,6 @@
 <template>
-	<VHeader></VHeader>
-	<router-view></router-view>
+  <VHeader></VHeader>
+  <router-view></router-view>
 </template>
 
 <script setup lang="ts">

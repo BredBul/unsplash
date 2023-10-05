@@ -1,49 +1,47 @@
 <template>
-	<section class="search-form">
-		<div class="search-form__container _container">
-			<div class="search-form__content">
-				<form @submit.prevent class="search-form__field">
-					<input
-						type="text"
-						:value="searchInput"
-						@keyup.enter="getSearch"
-						placeholder="Search an Image" />
-					<!-- <button @click="getSearch('f')">ff</button> -->
-				</form>
-			</div>
-		</div>
-	</section>
+  <section class="search-form">
+    <div class="search-form__container _container">
+      <div class="search-form__content">
+        <form class="search-form__field" @submit.prevent>
+          <input
+            type="text"
+            :modelValue="searchInput"
+            placeholder="Search an Image"
+            @keyup.enter="getSearch"
+          />
+        </form>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
-import { useStore } from "vuex";
+import { useRouter, useRoute } from "vue-router";
+import { useSearchedPhotosStore } from "@/stores/searched-photos";
 
-import type { Ref } from "vue";
-import type { LocationQueryValue } from "vue-router";
+const router = useRouter();
+const route = useRoute();
+const store = useSearchedPhotosStore();
 
-const route = useRouter();
-const store = useStore();
-
-const searchInput: Ref<string | LocationQueryValue[]> = ref("");
+const searchInput = ref("");
 
 function getSearch({ target }: KeyboardEvent) {
-	const { value } = target as HTMLInputElement;
-	if (route.currentRoute.value.name !== "search") {
-		route.push({ path: "search", query: { query: value } });
-	} else {
-		route.push({ query: { query: value } });
-	}
+  const { value } = target as HTMLInputElement;
+  if (route.name !== "search") {
+    router.push({ path: "search", query: { query: value } });
+  } else {
+    router.push({ query: { query: value } });
+  }
 
-	searchInput.value = value;
-	store.dispatch("fetchSearchedPhotos", { query: value, perPage: 9 });
+  searchInput.value = value;
+  store.fetchSearchedPhotos({ query: value, perPage: 9 });
 }
 
 onMounted(() => {
-	if (route.currentRoute.value.query.query) {
-		searchInput.value = route.currentRoute.value.query.query;
-	}
+  if (route.query.query) {
+    searchInput.value = route.query.query as string;
+  }
 });
 </script>
 

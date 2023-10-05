@@ -1,39 +1,59 @@
 <template>
   <section class="searched-photos">
     <div class="searched-photos__container _container">
-      <PhotoList :photos="searchedPhotos"/>
-      <Pagination :totalPages="totalPages" :currentPage="currentPage" class="searched-photos__pagination"/>
+      <PhotoList v-if="searchedPhotos?.length" :photos="searchedPhotos" />
+      {{ currentPage }}
+      <SearchPagination
+        v-if="totalPages"
+        :total-pages="totalPages"
+        :current-page="+currentPage"
+        class="searched-photos__pagination"
+        @change-page="onPageChange"
+      />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import PhotoList from "@/components/photo-list/PhotoList.vue";
-import Pagination from "@/pages/search/partials/Pagination.vue";
+import SearchPagination from "@/pages/search/partials/SearchPagination.vue";
 
-import {onMounted, computed} from "vue";
-import {useRouter} from "vue-router";
-import {useStore} from "vuex";
+import { onMounted, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { useSearchedPhotosStore } from "@/stores/searched-photos";
 
-const route = useRouter();
-const store = useStore();
+const router = useRouter();
+const route = useRoute();
+const store = useSearchedPhotosStore();
 
-const searchedPhotos = computed(() =>
-  store.state.searchedPhotos.results
-);
+const searchedPhotos = computed(() => store.searchedPhotos?.results);
 
-const totalPages = computed(() =>
-  store.state.searchedPhotos.total_pages
-);
+const totalPages = computed(() => store.searchedPhotos?.total_pages);
 
-const currentPage = computed(() =>
-  route.currentRoute.value.query.page ?? 1
-);
+const currentPage = computed(() => route.query.page ?? 1);
+
+const computedQuery = computed(() => route.query.query ?? "");
+
+function onPageChange(page: number) {
+  console.log(route);
+  console.log(router);
+  router.push({ query: { ...route.query, page } });
+  console.log(currentPage.value);
+  if (computedQuery.value) {
+    store.fetchSearchedPhotos({
+      query: computedQuery.value as string,
+      perPage: 3,
+      page: page,
+    });
+  }
+}
 
 onMounted(() => {
-  const query = route.currentRoute.value.query.query;
-  if (query) {
-    store.dispatch("fetchSearchedPhotos", {query, perPage: 9});
+  if (computedQuery.value) {
+    store.fetchSearchedPhotos({
+      query: computedQuery.value as string,
+      perPage: 3,
+    });
   }
 });
 </script>

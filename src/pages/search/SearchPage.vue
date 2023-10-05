@@ -1,8 +1,8 @@
 <template>
-	<main class="search-page">
-		<SearchForm class="search-page__search-form" />
+  <main class="search-page">
+    <SearchForm class="search-page__search-form" />
     <SearchedPhotos class="search-page__searched-photos" />
-	</main>
+  </main>
 </template>
 
 <script setup lang="ts">

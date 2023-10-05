@@ -1,8 +1,8 @@
 <template>
-	<main class="home-page">
-		<SearchForm class="home-page__search-form"/>
-		<RandomPhotos class="home-page__random-photos" />
-	</main>
+  <main class="home-page">
+    <SearchForm class="home-page__search-form" />
+    <RandomPhotos class="home-page__random-photos" />
+  </main>
 </template>
 
 <script setup lang="ts">

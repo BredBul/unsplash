@@ -1,23 +1,22 @@
 <template>
-	<section class="random-photos">
-		<div class="random-photos__container _container">
-			<PhotoList :photos="randomPhotos" />
-		</div>
-	</section>
+  <section class="random-photos">
+    <div class="random-photos__container _container">
+      <PhotoList v-if="randomPhotos !== undefined" :photos="randomPhotos" />
+    </div>
+  </section>
 </template>
 
 <script setup lang="ts">
 import PhotoList from "@/components/photo-list/PhotoList.vue";
+
 import { onMounted, computed } from "vue";
-import { useStore } from "vuex";
+import { useRandomPhotosStore } from "@/stores/random-photos";
 
-const store = useStore();
+const store = useRandomPhotosStore();
 
-const randomPhotos = computed(() => {
-	return store.state.randomPhotos;
-});
+const randomPhotos = computed(() => store.randomPhotos);
 
 onMounted(() => {
-	store.dispatch("fetchRandomPhotos", 9);
+  store.fetchRandomPhotos(9);
 });
 </script>
