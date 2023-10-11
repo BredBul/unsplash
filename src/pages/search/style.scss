@@ -1,3 +1,19 @@
 .searched-photos {
   margin-top: 130px;
 }
+
+.pagination {
+  &__items {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  &__item {
+    padding: 5px;
+    min-width: 25px;
+    min-height: 25px;
+    &.current {
+      background-color: orange;
+    }
+  }
+}

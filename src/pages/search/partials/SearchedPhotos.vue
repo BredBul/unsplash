@@ -2,7 +2,6 @@
   <section class="searched-photos">
     <div class="searched-photos__container _container">
       <PhotoList v-if="searchedPhotos?.length" :photos="searchedPhotos" />
-      {{ currentPage }}
       <SearchPagination
         v-if="totalPages"
         :total-pages="totalPages"
@@ -35,10 +34,8 @@ const currentPage = computed(() => route.query.page ?? 1);
 const computedQuery = computed(() => route.query.query ?? "");
 
 function onPageChange(page: number) {
-  console.log(route);
-  console.log(router);
   router.push({ query: { ...route.query, page } });
-  console.log(currentPage.value);
+
   if (computedQuery.value) {
     store.fetchSearchedPhotos({
       query: computedQuery.value as string,

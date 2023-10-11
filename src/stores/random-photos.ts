@@ -11,9 +11,7 @@ export const useRandomPhotosStore = defineStore("randomPhotos", () => {
 
   async function fetchRandomPhotos(count: number = 10) {
     try {
-      const data = await unsplash.photos.getRandom({
-        count: count,
-      });
+      const data = await unsplash.photos.getRandom({ count });
 
       randomPhotos.value = data.response;
     } catch (error) {

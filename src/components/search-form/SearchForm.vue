@@ -35,7 +35,7 @@ function getSearch({ target }: KeyboardEvent) {
   }
 
   searchInput.value = value;
-  store.fetchSearchedPhotos({ query: value, perPage: 9 });
+  store.fetchSearchedPhotos({ query: value, perPage: 3 });
 }
 
 onMounted(() => {

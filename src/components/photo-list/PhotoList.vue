@@ -12,15 +12,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, toRefs } from "vue";
 import type { Random, Basic } from "unsplash-js/dist/methods/photos/types";
 
-const { photos } = defineProps<{
+const props = defineProps<{
   photos: Basic[] | Random[] | Random | undefined;
 }>();
 
+const { photos } = toRefs(props);
+
 const displayedPhotos = computed(() =>
-  Array.isArray(photos) ? photos : [photos],
+  Array.isArray(photos.value) ? photos.value : [photos.value],
 );
 </script>
 
